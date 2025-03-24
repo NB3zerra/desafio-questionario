@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Questionários</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body class="bg-dark text-white">
+  <div class="container mt-5">
+    <h1 class="text-primary">Questionários</h1>
+    <form action="/questionarios/novo" method="POST" class="mb-4">
+      <div class="form-group">
+        <input type="text" name="titulo" class="form-control" placeholder="Título do Questionário" required>
+      </div>
+      <div class="form-group">
+        <textarea name="perguntas" class="form-control" placeholder="Perguntas (separadas por vírgula)" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Criar Questionário</button>
+    </form>
+    <table class="table table-dark table-striped">
+      <thead>
+        <tr>
+          <th>Nome do Questionário</th>
+          <th>Quantidade de Perguntas</th>
+          <th>Responder</th>
+          <th>Ver respostas</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% questionarios.forEach(questionario => { %>
+          <tr>
+            <td><%= questionario.titulo %></td>
+            <td><%= questionario.perguntas.split(',').length %></td>
+            <td><a href="/questionarios/<%= questionario.id %>" class="btn btn-primary">Responder Questionário</a></td>
+            <td><a href="/questionarios/<%= questionario.id %>/respostas" class="btn btn-secondary">Ver Respostas</a></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

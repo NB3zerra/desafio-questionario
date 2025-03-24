@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= questionario.titulo %></title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body class="bg-dark text-white">
+  <div class="container mt-5">
+    <a href="/questionarios" class="btn btn-secondary mb-4">Voltar</a>
+    <h1 class="text-primary"><%= questionario.titulo %></h1>
+    <form action="/questionarios/responder" method="POST">
+      <input type="hidden" name="id" value="<%= questionario.id %>">
+      <table class="table table-dark table-striped">
+        <thead>
+          <tr>
+            <th>Pergunta</th>
+            <th>Resposta</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% questionario.perguntas.split(',').forEach((pergunta, index) => { %>
+            <tr>
+              <td><%= pergunta.trim() %></td>
+              <td><input type="text" name="respostas[<%= index %>]" class="form-control" required></td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+      <button type="submit" class="btn btn-primary">Enviar Respostas</button>
+    </form>
+  </div>
+</body>
+</html>
